@@ -3,12 +3,14 @@
  */
 package FFSSM;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Club {
 
- 
     public Moniteur president;
 
     public String nom;
@@ -17,39 +19,53 @@ public class Club {
 
     public String telephone;
 
-    public Club(Moniteur président, String nom, String telephone) {
-        this.president = président;
+    public Set<Plongee> myPlongees;
+    
+    private List<Embauche> myEmplois = new ArrayList<>();
+
+    public Club(Moniteur president, String nom, String telephone) {
+        this.setPresident(president);
         this.nom = nom;
         this.telephone = telephone;
+        this.myPlongees = new HashSet<>();
     }
 
     /**
-     * Calcule l'ensemble des plongées non conformes organisées par ce club.
-     * Une plongée est conforme si tous les plongeurs de la palanquée ont une licence
-     * valide à la date de la plongée
+     * Calcule l'ensemble des plongées non conformes organisées par ce club. Une
+     * plongée est conforme si tous les plongeurs de la palanquée ont une
+     * licence valide à la date de la plongée
+     *
      * @return l'ensemble des plongées non conformes
      */
     public Set<Plongee> plongeesNonConformes() {
-         // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        Set<Plongee> pNonConformes = new HashSet<>();
+        for(Plongee p : this.myPlongees) {
+            if (!p.estConforme()) {
+                pNonConformes.add(p);
+            }
+
+        }
+        return pNonConformes;
     }
 
     /**
      * Enregistre une nouvelle plongée organisée par ce club
+     *
      * @param p la nouvelle plongée
      */
     public void organisePlongee(Plongee p) {
-         // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        this.myPlongees.add(p);
     }
-    
-    
+
     public Moniteur getPresident() {
         return president;
     }
 
-    public void setPresident(Moniteur président) {
-        this.president = président;
+    public void setPresident(Moniteur president) {
+        if (null == president)
+            // Le président est inconnu, sans plus d'informations
+            this.president=new Moniteur("Inconnu", "Inconnu", "Inconnu", "Inconnu", "Inconnu", LocalDate.EPOCH,0,0,null);
+        this.president = president;
     }
 
     public String getNom() {

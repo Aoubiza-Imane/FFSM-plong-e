@@ -23,57 +23,58 @@ public class Embauche {
      * @param dateFin la date à laquelle cette embauche est terminée
      */
     public void terminer(LocalDate dateFin) {
-         // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");	    
+         this.fin=dateFin;
+         if (this.employeur.getPresident().equals(this.employe))
+             this.employeur.setPresident(null);
     }
     
     /**
-     * Est-ce que cette embauche est terminée ?
+     * Est-ce que cette embauche est achevée ?
      * @return vrai si terminée, faux sinon.
      */
     public boolean estTerminee() {
         return (fin != null);
     }
     /**
-     * Get the value of employeur
+     * Récupère la valeur de l'employeur
      *
-     * @return the value of employeur
+     * @return la valeur de l'employeur
      */
     public Club getEmployeur() {
         return employeur;
     }
 
     /**
-     * Get the value of employe
+     * Récupère la valeur de l'employé
      *
-     * @return the value of employe
+     * @return valeur de l'employé
      */
     public Moniteur getEmploye() {
         return employe;
     }
 
     /**
-     * Get the value of fin
+     * Récupère la valeur de fin
      *
-     * @return the value of fin
+     * @return valeur de la fin
      */
     public LocalDate getFin() {
         return fin;
     }
 
     /**
-     * Set the value of fin
+     * Définit la valeur de fin
      *
-     * @param fin new value of fin
+     * @param fin nouvelle valeur de fin
      */
     public void setFin(LocalDate fin) {
         this.fin = fin;
     }
 
     /**
-     * Get the value of debut
+     * Récupère la valeur du début
      *
-     * @return the value of debut
+     * @return la valeur du début
      */
     public LocalDate getDebut() {
         return debut;
